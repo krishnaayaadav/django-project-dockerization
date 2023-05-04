@@ -1,0 +1,16 @@
+version: "4.19.0"
+
+services:
+  app:
+    build: .
+
+    volumes:
+      - .:/django
+    
+    ports:
+      - 8000:8000
+    
+    image: application:django
+    container_name: app_container
+
+    command: gunicorn djSignals.wsgi:application --bind 0.0.0.0:8000

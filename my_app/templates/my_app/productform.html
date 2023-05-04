@@ -1,0 +1,52 @@
+{% extends 'my_app/base.html' %}
+{% load static %} 
+
+{% block title %}
+Products App
+
+{% endblock title %}
+
+{% block main_content %}
+
+<table>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+    <h3>{{products}} </h3>
+
+    {% for prod in prodcuts %}
+        <tr>
+        <td>{{prod.id}}</td>
+        <td>{{prod.name}} </td>
+        <td>{{prod.description}}</td>
+        <td>
+            <a href="{% url 'deleteproducts' prod.pk %}">Delete</a>
+        </td>
+        
+        </tr>
+    {% endfor %}
+
+    
+  </table>
+
+
+<h2> Add Products</h2>
+<form novalidate method="post">
+    {% csrf_token %}
+
+    {% for field in form %}
+       
+        {{field.label_tag}}
+        {{field}} 
+        {{field.errors}}
+        <br>
+
+    {% endfor %} <br>
+    <input type='submit' value='Add Products'>
+
+</form>
+
+
+{% endblock main_content %}
